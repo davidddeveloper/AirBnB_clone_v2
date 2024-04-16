@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] is '{' and pline[-1] is'}'\
+                    if pline[0] is '{' and pline[-1] is '}'\
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -118,10 +118,54 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+
+        else:
+            values = args.split(" ")
+            for value in values:
+                idx = values.index(value)
+                if idx > 0:
+                    values[idx] = value.split("=")
+
+            for value in values:
+                idx = values.index(value)
+                if idx > 0:
+                    if len(values[idx]) > 1:
+                        values[idx][1] = values[idx][1].strip('"')
+                        values[idx][1] = values[idx][1].strip("'")
+
+        cls_name = values[0]
+        if cls_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
+        new_instance = HBNBCommand.classes[cls_name]()
+
+        for value in values:
+            idx = values.index(value)
+            if idx > 0:
+                attr_name = value[0]
+                try:
+                    attr_value = value[1]
+                except IndexError:
+                    attr_value = ''
+
+                try:
+                    if attr_name == 'longitude' or attr_name == 'latitude':
+                        attr_value = float(value[1])
+                    elif attr_name[-2:] != 'id':
+                        attr_value = int(value[1])
+                except Exception:
+                    try:
+                        attr_value = value[1]
+                    except IndexError:
+                        pass
+
+                if isinstance(attr_value, str):
+                    # achieve this my_little_cat --> my little cat
+                    attr_value = attr_value.replace('_', ' ')
+
+                if attr_value != "":
+                    setattr(new_instance, attr_name, attr_value)
+
         storage.save()
         print(new_instance.id)
         storage.save()
@@ -187,7 +231,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -238,6 +282,7 @@ class HBNBCommand(cmd.Cmd):
 
         # isolate cls from id/args, ex: (<cls>, delim, <id/args>)
         args = args.partition(" ")
+        print(args)
         if args[0]:
             c_name = args[0]
         else:  # class name not present
@@ -319,6 +364,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
