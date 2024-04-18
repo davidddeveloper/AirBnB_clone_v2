@@ -7,13 +7,13 @@ from . import setenv_env
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from user import User
-from state import State
-from city import City
-from amenity import Amenity
-from place import Place
-from review import Review
-from base_model import Base
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
+from models.base_model import Base
 from sqlalchemy.orm import scoped_session
 
 
