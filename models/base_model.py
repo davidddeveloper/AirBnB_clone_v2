@@ -20,11 +20,11 @@ class BaseModel:
                                 nullable=False,
                                 unique=True)
             # self.created_at = datetime.now()
-            self.created_at = DateTime(nullable=False,
-                            default=datetime.utcnow())
+            self.created_at = Column(DateTime, default=datetime.utcnow,
+                                nullable=False)
             # self.updated_at = datetime.now()
-            self.updated_at = DateTime(nullable=False,
-                            default=datetime.utcnow())
+            self.updated_at = Column(DateTime, default=datetime.utcnow,
+                                nullable=False)
         else:
             try:
                 kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],

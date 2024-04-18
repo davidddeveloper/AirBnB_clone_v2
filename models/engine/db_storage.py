@@ -15,6 +15,7 @@ from models.place import Place
 from models.review import Review
 from models.base_model import Base
 from sqlalchemy.orm import scoped_session
+from urllib.parse import quote_plus
 
 
 class DBStorage:
@@ -30,9 +31,9 @@ class DBStorage:
 
     def __init__(self):
         # mysql://HBNB_MYSQL_USER:HBNB_MYSQL_PWD@HBNB_MYSQL_HOST/HBNB_MYSQL_DB
+        password = quote_plus(os.getenv('HBNB_MYSQL_PWD'))
         self.__engine = create_engine(
-            f"mysql://{os.getenv('HBNB_MYSQL_USER')}:{os.getenv('HBNB_MYSQL_PWD')}"
-            f"@{os.getenv('HBNB_MYSQL_HOST')}/{os.getenv('HBNB_MYSQL_DB')}",
+            f"mysql://{os.getenv('HBNB_MYSQL_USER')}:{password}@{os.getenv('HBNB_MYSQL_HOST')}/{os.getenv('HBNB_MYSQL_DB')}",
             pool_pre_ping=True,
             echo=True
         )
