@@ -10,8 +10,8 @@ from models.city import City
 class State(BaseModel, Base):
     """ State class """
     __tablename__ = "states"
-    id = Column(String, primary_key=True,
-                                nullable=False,
-                                unique=True)
+    #id = Column(String, primary_key=True,
+    #                            nullable=False,
+    #                            unique=True)
     name = Column(String(128), nullable=False)
     cities = relationship(City, back_populates="state", cascade="all, delete")

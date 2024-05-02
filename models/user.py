@@ -8,6 +8,7 @@ from sqlalchemy import Column, String, Integer, ForeignKey
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     __tablename__ = 'users'
+    #id = Column(Integer(128), primary_key=True, nullable=False)
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=False)
