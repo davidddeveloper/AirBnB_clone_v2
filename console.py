@@ -245,10 +245,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
+
+        cls = args.split(' ')[0]
         if os.getenv("HBNB_TYPE_STORAGE") == 'db':
-            cls = args.split(' ')[0]
-            print(storage.all(HBNBCommand.classes[cls]))
-            return;
+            all_objs = storage.all(HBNBCommand.classes[cls])
+            print(all_objs)
+        else:
+            all_objs = storage._FileStorage__objects
 
         print_list = []
 
@@ -257,11 +260,13 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in all_objs.items():
                 if k.split('.')[0] == args:
+                    del v.__dict__['_sa_instance_state']
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in all_objs.items():
+                del v.__dict__['_sa_instance_state']
                 print_list.append(str(v))
 
         print(print_list)

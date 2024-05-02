@@ -52,8 +52,7 @@ class DBStorage:
         if cls is None:
             # query all instances
             for row in self.__session.query(User, State,
-                                        City, Amenity,
-                                        Place, Review).all():
+                                        City).all():
                 for obj in row:
                     objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
     
@@ -61,7 +60,7 @@ class DBStorage:
 
         # query all instance for a specific class
         for obj in self.__session.query(cls).all():
-            objects[f'{obj.__class__.__name__}.{obj.id}'] = obj.to_dict()
+            objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
 
         return objects # {<class-name>.<object-id>: <obj>}
     
