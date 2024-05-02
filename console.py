@@ -139,7 +139,6 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[cls_name]()
-        #print("hey", new_instance)
 
         for value in values:
             idx = values.index(value)
