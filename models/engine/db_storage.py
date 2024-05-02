@@ -60,8 +60,8 @@ class DBStorage:
             return objects # {<class-name>.<object-id>: <obj>}
 
         # query all instance for a specific class
-        for row in self.__session.query(cls).all():
-            objects[f'{row.__class__}.{row.id}'] = row
+        for obj in self.__session.query(cls).all():
+            objects[f'{obj.__class__.__name__}.{obj.id}'] = obj.to_dict()
 
         return objects # {<class-name>.<object-id>: <obj>}
     
