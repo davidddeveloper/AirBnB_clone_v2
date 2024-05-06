@@ -247,8 +247,10 @@ class HBNBCommand(cmd.Cmd):
 
         cls = args.split(' ')[0]
         if os.getenv("HBNB_TYPE_STORAGE") == 'db':
-            all_objs = storage.all(HBNBCommand.classes[cls])
-            print(all_objs)
+            if args:
+                all_objs = storage.all(HBNBCommand.classes[cls])
+            else:
+                all_objs = storage.all()
         else:
             all_objs = storage._FileStorage__objects
 
@@ -261,11 +263,15 @@ class HBNBCommand(cmd.Cmd):
                 return
             for k, v in all_objs.items():
                 if k.split('.')[0] == args:
-                    del v.__dict__['_sa_instance_state']
+                    if '_sa_instance_state' in v.__dict__:
+                        del v.__dict__['_sa_instance_state']
+
                     print_list.append(str(v))
         else:
             for k, v in all_objs.items():
-                del v.__dict__['_sa_instance_state']
+                if '_sa_instance_state' in v.__dict__:
+                    del v.__dict__['_sa_instance_state']
+
                 print_list.append(str(v))
 
         print(print_list)
