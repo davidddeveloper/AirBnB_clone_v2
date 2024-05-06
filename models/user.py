@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 """This module defines a class User"""
-from models.base_model import BaseModel
-from models.base_model import Base
 from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.orm import relationship
+from models.base_model import BaseModel, Base
+from models.place import Place
 
 
 class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     __tablename__ = 'users'
-    #id = Column(Integer(128), primary_key=True, nullable=False)
+
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     first_name = Column(String(128), nullable=False)
     last_name = Column(String(128), nullable=False)
+    places = relationship(Place, back_populates="users", cascade="all, delete")
