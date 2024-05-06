@@ -3,6 +3,7 @@
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
+from models.review import Review
 
 
 class Place(BaseModel, Base):
@@ -25,4 +26,12 @@ class Place(BaseModel, Base):
     longitude = Column(Float, nullable=True)
     users = relationship("User", back_populates="places")
     cities = relationship("City", back_populates="places")
+    reviews = relationship(
+            "Review", back_populates="places", cascade="all, delete"
+    )
     amenity_ids = []
+
+    @property
+    def reviews(self):
+        # reviews = Storage.all(Review)
+        return []
