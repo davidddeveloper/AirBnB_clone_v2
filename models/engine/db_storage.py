@@ -118,4 +118,4 @@ class DBStorage:
         self.__session = self.__session()
 
         # Load the data from the database
-        storage.all()
+        self.all()
