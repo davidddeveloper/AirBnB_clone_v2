@@ -66,7 +66,7 @@ class DBStorage:
             for table_name in metadata.tables:
                 cls = DBStorage.__mappings[table_name]
                 query = self.__session.query(cls)
-                result = query.all()
+                result = query.fetchall()
 
                 for obj in result:
                     objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
