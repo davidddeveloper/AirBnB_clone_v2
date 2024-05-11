@@ -14,6 +14,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from models.base_model import Base, BaseModel
+from models.place_amenity import place_amenity
 from sqlalchemy.orm import scoped_session
 from urllib.parse import quote_plus
 
@@ -31,7 +32,7 @@ class DBStorage:
     __mappings = {
                'users': User, 'places': Place,
                'states': State, 'cities': City, 'amenities': Amenity,
-               'reviews': Review
+               'reviews': Review, 'place_amenity': place_amenity
               }
 
     def __init__(self):
