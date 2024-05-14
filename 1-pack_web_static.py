@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/python3
 # a Fabric script that generates a .tgz archive from the contents of the web_static
 # using the function do_pack
 from fabric.api import local
