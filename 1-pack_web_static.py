@@ -7,4 +7,4 @@ from fabric.api import local
 def do_pack():
     "creating an archive"
     local("mkdir -p versions")
-    local('tar -cvf versions/web_static_$(date +"%Y%m%d%H%M%S").tgz web_static')
+    local('tar -czvf versions/web_static_$(date +"%Y%m%d%H%M%S").tgz web_static')
