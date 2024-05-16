@@ -16,14 +16,14 @@ file_html="<html>
 </html>"
 sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared
-sudo mkdir -p /data/web_static/current
+# sudo mkdir -p /data/web_static/current
 echo "$file_html" | sudo tee "$file" > /dev/null
-echo "$file_html" | sudo tee "/data/web_static/current/index.html" > /dev/null
+# echo "$file_html" | sudo tee "/data/web_static/current/index.html" > /dev/null
 
 # create a symbolic link (current --> test)
-sudo ln -f -s /data/web_static/releases/test/ /data/web_static/current
+sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 
-# chango ownership of data
+# change ownership of data
 sudo chown "$USER":"$USER" /data/
 
 # configure nginx
