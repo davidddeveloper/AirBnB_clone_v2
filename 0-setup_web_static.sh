@@ -24,7 +24,7 @@ echo "$file_html" | sudo tee "$file" > /dev/null
 sudo ln -s /data/web_static/releases/test/ /data/web_static/current
 
 # change ownership of data
-sudo chown "$USER":"$USER" /data/
+sudo chown -R ubuntu:ubuntu /data/
 
 # configure nginx
 config_file="/etc/nginx/sites-available/default"
