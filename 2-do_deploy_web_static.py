@@ -48,13 +48,13 @@ def do_deploy(archive_path):
 
     source = f"{uncompress_dir}/{archive_name}/web_static/*"
     destination = f"{uncompress_dir}/{archive_name}"
-    run(f"sudo mv /{source} {destination}")
+    run(f"sudo mv {source} {destination}")
     run(
-        f"sudo rm -rf /{uncompress_dir}/{archive_name}/web_static"
+        f"sudo rm -rf {uncompress_dir}/{archive_name}/web_static"
     )
     run("sudo rm -rf /data/web_static/current")
 
-    source = f"/{uncompress_dir}/{archive_name}"
+    source = f"{uncompress_dir}/{archive_name}"
     destination = f"/data/web_static/current"
     run(
         f"sudo ln -f -s {source} {destination}"
