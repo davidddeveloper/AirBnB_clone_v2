@@ -54,9 +54,10 @@ def do_deploy(archive_path):
     )
     run("sudo rm -rf /data/web_static/current")
 
-    spread = f"/{uncompress_dir}/{archive_name} /data/web_static/current"
+    source = f"/{uncompress_dir}/{archive_name}"
+    destination = f"/data/web_static/current"
     run(
-        "sudo ln -f -s {spread}"
+        f"sudo ln -f -s {source} {destination}"
     )
 
     return True
