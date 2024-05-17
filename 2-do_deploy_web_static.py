@@ -5,7 +5,7 @@ using the function do_deploy
 
 """
 import os
-from fabric.api import local, put, run
+from fabric.api import env, local, put, run
 
 env.hosts = ["54.144.251.105", "54.90.53.190"]
 env.user = "ubuntu"
@@ -32,10 +32,10 @@ def do_deploy(archive_path):
 
     """
 
-    if not os.exists(archive_path):
+    if not os.path.exists(archive_path):
         return False
 
-    put(f"{archive_path} /tmp/")
+    put(f"{archive_path}", "/tmp/")
 
     archive_name = archive_path.split("/")[1]
     archive_name = archive_name.split(".")[0]
@@ -46,8 +46,13 @@ def do_deploy(archive_path):
         f"sudo tar -xzf /tmp/{archive_name}.tgz -C {uncompress_dir}/{archive_name}"
     )
 
-    run(f"sudo rm -rf /tmp/{archive_path}")
-    run("sudo rm -r /data/web_static/current")
+    source = f"{uncompress_dir}/{archive_name}/web_static/*"
+    destination = f"{uncompress_dir}/{archive_name}"
+    run(f"sudo mv /source destination")
+    run(
+        f"sudo rm -rf /{uncompress_dir}/{archive_name}/web_static"
+    )
+    run("sudo rm -rf /data/web_static/current")
 
     spread = f"/{uncompress_dir}/{archive_name} /data/web_static/current"
     run(
