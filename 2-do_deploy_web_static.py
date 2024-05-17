@@ -42,15 +42,17 @@ def do_deploy(archive_path):
 
     uncompress_dir = "/data/web_static/releases/"
     run(f"sudo mkdir -p {uncompress_dir}/{archive_name}")
+
+    destination = f"{uncompress_dir}/{archive_name}"
     run(
-        f"sudo tar -xzf /tmp/{archive_name}.tgz -C {uncompress_dir}/{archive_name}"
+        f"sudo tar -xzf /tmp/{archive_name}.tgz -C {destination}"
     )
 
     source = f"{uncompress_dir}/{archive_name}/web_static/*"
-    destination = f"{uncompress_dir}/{archive_name}"
-    run(f"sudo mv {source} {destination}")
+    destination = f"{uncompress_dir}{archive_name}"
+    # run(f"sudo mv {source} {destination}")
     run(
-        f"sudo rm -rf {uncompress_dir}/{archive_name}/web_static"
+        f"sudo rm -rf {uncompress_dir}{archive_name}/web_static"
     )
     run("sudo rm -rf /data/web_static/current")
 
