@@ -21,7 +21,7 @@ def do_pack():
         f"tar -czvf versions/web_static_{timestamp}.tgz web_static"
     )
 
-    return f"versions/web_static_{timestamp}"
+    return f"versions/web_static_{timestamp}.tgz"
 
 
 def do_deploy(archive_path):
@@ -78,5 +78,7 @@ def deploy():
 
     # create an archive
     archive_path = do_pack()
+
     # distributes archive to servers
-    return do_deploy(archive_path)
+    result = do_deploy(archive_path)
+    return result
