@@ -39,6 +39,7 @@ def do_deploy(archive_path):
 
     archive_name = archive_path.split("/")[1]
     archive_name = archive_name.split(".")[0]
+    print(archive_name)
 
     uncompress_dir = "/data/web_static/releases/"
     run(f"sudo mkdir -p {uncompress_dir}/{archive_name}")
@@ -47,6 +48,8 @@ def do_deploy(archive_path):
     run(
         f"sudo tar -xzf /tmp/{archive_name}.tgz -C {destination}"
     )
+
+    run(f"sudo rm /tmp/{archive_name}.tgz")
 
     source = f"{uncompress_dir}/{archive_name}/web_static/*"
     destination = f"{uncompress_dir}{archive_name}"
@@ -59,7 +62,7 @@ def do_deploy(archive_path):
     source = f"{uncompress_dir}/{archive_name}"
     destination = f"/data/web_static/current"
     run(
-        f"sudo ln -f -s {source} {destination}"
+        f"sudo ln -s {source} {destination}"
     )
 
     return True
