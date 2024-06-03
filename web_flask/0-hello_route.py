@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
     a script that starts a Flask web application:
         listening on 0.0.0.0
@@ -15,6 +16,7 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello():
+    """ handle / route """
     return "Hello HBNB!"
 
 
