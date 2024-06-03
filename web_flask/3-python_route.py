@@ -33,7 +33,7 @@ def hbnb_c(text):
 
 
 @app.route("/python/<text>")
-def hbnb_python():
+def hbnb_python(text):
     """ takes a value and returns it """
     return f"Python {text.replace('_', ' ')}"
 
