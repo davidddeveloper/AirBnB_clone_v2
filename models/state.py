@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """ State Module for HBNB project """
+import os
 from models.base_model import BaseModel
 from models.base_model import Base
 from sqlalchemy import Column, String, Integer, ForeignKey
@@ -14,9 +15,9 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
-    if storage.__class__.__name__ == 'DBStorage':
-        cities = relationship(City, back_populates="state", cascade="all, delete")
-    else:  # FileStorage
+    cities = relationship(City, back_populates="state", cascade="all, delete")
+    print('---->', os.getenv('HBNB_MYSQL_DB'))
+    if os.getenv('HBNB_MYSQL_DB') != "DBStorage":
         @property
         def cities(self):
             """ Retrives cities associated with a specific state by """
