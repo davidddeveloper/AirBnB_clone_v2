@@ -67,3 +67,7 @@ class FileStorage:
             del FileStorage.__objects[f'{obj.__class__.__name__}.{obj.id}']
         except Exception:
             pass
+
+    def close(self):
+        """ calls reload to deserialize the JSON file to objects """
+        FileStorage.reload(self)

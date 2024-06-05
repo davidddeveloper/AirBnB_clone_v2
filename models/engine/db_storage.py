@@ -120,3 +120,8 @@ class DBStorage:
 
         # Load the data from the database
         self.all()
+
+
+    def close(self):
+        """ detach an object from the current session """
+        DBStorage.__session.remove()
