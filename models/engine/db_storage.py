@@ -116,7 +116,7 @@ class DBStorage:
                 bind=self.__engine,
                 expire_on_commit=False)
         self.__session = scoped_session(session_factory)
-        self.__session = self.__session()
+        # self.__session = self.__session()
 
         # Load the data from the database
         self.all()
@@ -124,4 +124,4 @@ class DBStorage:
 
     def close(self):
         """ detach an object from the current session """
-        DBStorage.__session.remove()
+        self.__session.remove()

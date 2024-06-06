@@ -14,7 +14,13 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
-    if os.getenv('HBNB_TYPE_STORAGE') != "DBStorage":
+    if os.getenv('HBNB_TYPE_STORAGE') in ["db", "DBStorage"]:
+        cities = relationship(
+                City,
+                back_populates="state",
+                cascade="all, delete"
+        )
+    else:
         @property
         def cities(self):
             """ Retrives cities associated with a specific state by """
@@ -33,9 +39,3 @@ class State(BaseModel, Base):
                     pass
 
             return cities_in_state
-    else:
-        cities = relationship(
-                City,
-                back_populates="state",
-                cascade="all, delete"
-        )
