@@ -2,18 +2,19 @@
 """
     a script that starts a Flask web application:
 """
-from flask import Flask
+from flask import Flask, render_template
 from models.__init__ import storage
 
-app = Flask(__name__, strict_slashes=False)
+app = Flask(__name__)
 
 
-@app.route("/states_list")
+@app.route("/states_list", strict_slashes=False)
 def hbnb_states():
     """ serves a lists of states """
     from models.state import State
 
     states = storage.all(State)
+    print('-->', states)
     return render_template("7-states_list.html", states=states)
 
 
