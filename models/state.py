@@ -10,14 +10,11 @@ from models.city import City
 
 class State(BaseModel, Base):
     """ State class """
-    from models.__init__ import storage
 
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
-    cities = relationship(City, back_populates="state", cascade="all, delete")
-    print('---->', os.getenv('HBNB_MYSQL_DB'))
-    if os.getenv('HBNB_MYSQL_DB') != "DBStorage":
+    if os.getenv('HBNB_TYPE_STORAGE') != "DBStorage":
         @property
         def cities(self):
             """ Retrives cities associated with a specific state by """
@@ -36,3 +33,9 @@ class State(BaseModel, Base):
                     pass
 
             return cities_in_state
+    else:
+        cities = relationship(
+                City,
+                back_populates="state",
+                cascade="all, delete"
+        )
