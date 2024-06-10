@@ -20,6 +20,9 @@ class Review(BaseModel, Base):
                 String(60), ForeignKey("users.id"), nullable=False
         )
         users = relationship("User", back_populates="reviews")
+        places = relationship(
+                "Place", back_populates="reviews", cascade="all, delete"
+        )
 
     else:
         place_id = ""

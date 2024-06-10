@@ -16,7 +16,8 @@ class Place(BaseModel, Base):
         __tablename__ = "places"
 
         city_id = Column(
-                String(60), ForeignKey("cities.id"), nullable=False
+                String(60),
+                ForeignKey("cities.id")
         )
         user_id = Column(
                 String(60), ForeignKey("users.id"), nullable=False
