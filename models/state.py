@@ -11,16 +11,22 @@ from models.city import City
 class State(BaseModel, Base):
     """ State class """
 
-    __tablename__ = "states"
-    name = Column(String(128), nullable=False)
-
     if os.getenv('HBNB_TYPE_STORAGE') in ["db", "DBStorage"]:
+        __tablename__ = "states"
+        name = Column(String(128), nullable=False)
         cities = relationship(
                 City,
                 back_populates="state",
                 cascade="all, delete"
         )
     else:
+        name = ""
+
+    def __init__(self, *args, **kwargs):
+        """ Initialize states """
+        super().__init__(*args, **kwargs)
+
+    if os.getenv('HBNB_TYPE_STORAGE') != "db":
         @property
         def cities(self):
             """ Retrives cities associated with a specific state by """
