@@ -17,7 +17,8 @@ class Place(BaseModel, Base):
 
         city_id = Column(
                 String(60),
-                ForeignKey("cities.id")
+                ForeignKey("cities.id"),
+                nullable=False
         )
         user_id = Column(
                 String(60), ForeignKey("users.id"), nullable=False

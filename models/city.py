@@ -19,7 +19,6 @@ class City(BaseModel, Base):
         places = relationship(
                 Place, back_populates="cities", cascade="all, delete"
         )
-        state = relationship("State", back_populates="cities")
     else:
         state_id = ""
         name = ""

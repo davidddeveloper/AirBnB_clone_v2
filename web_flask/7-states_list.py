@@ -14,7 +14,6 @@ def hbnb_states():
     from models.state import State
 
     states = storage.all(State)
-    print('-->', states)
     return render_template("7-states_list.html", states=states)
 
 
