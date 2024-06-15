@@ -117,8 +117,8 @@ class DBStorage:
         session_factory = sessionmaker(
                 bind=self.__engine,
                 expire_on_commit=False)
-        self.__session = scoped_session(session_factory)
-        self.__session = self.__session
+        Session = scoped_session(session_factory)
+        self.__session = Session
 
         # Load the data from the database
         self.all()
