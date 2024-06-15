@@ -42,7 +42,6 @@ class DBStorage:
         password = os.getenv('HBNB_MYSQL_PWD')
         url = f"mysql://{os.getenv('HBNB_MYSQL_USER')}:{password}"
         url += f"@{os.getenv('HBNB_MYSQL_HOST')}/{os.getenv('HBNB_MYSQL_DB')}"
-        print(url, "--------------------->")
         self.__engine = create_engine(
             url,
             pool_pre_ping=True,
