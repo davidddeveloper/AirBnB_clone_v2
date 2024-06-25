@@ -40,8 +40,8 @@ class DBStorage:
         # mysql://HBNB_MYSQL_USER:HBNB_MYSQL_PWD@HBNB_MYSQL_HOST/HBNB_MYSQL_DB
         # password = quote_plus(os.getenv('HBNB_MYSQL_PWD'))
         password = os.getenv('HBNB_MYSQL_PWD')
-        url = f"mysql://{os.getenv('HBNB_MYSQL_USER')}:{password}"
-        url += f"@{os.getenv('HBNB_MYSQL_HOST')}/{os.getenv('HBNB_MYSQL_DB')}"
+        url = "mysql://{}:{}".format(os.getenv('HBNB_MYSQL_USER'), password)
+        url += "@{}/{}".format(os.getenv('HBNB_MYSQL_HOST'), os.getenv('HBNB_MYSQL_DB'))
         self.__engine = create_engine(
             url,
             pool_pre_ping=True,
@@ -71,13 +71,13 @@ class DBStorage:
                 result = query.all()
 
                 for obj in result:
-                    objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
+                    objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
             return objects  # {<class-name>.<object-id>: <obj>}
 
         # query all instance for a specific class
         for obj in self.__session.query(cls).all():
-            objects[f'{obj.__class__.__name__}.{obj.id}'] = obj
+            objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
 
         return objects  # {<class-name>.<object-id>: <obj>}
 

@@ -96,6 +96,6 @@ class BaseModel:
         """deletes the current instance from the storage"""
         from models import storage
 
-        instance = storage.all()[f'{self.__class__.__name__}.{self.id}']
+        instance = storage.all()['{}.{}'.format(self.__class__.__name__, self.id)]
         if instance is not None:
             storage.delete(instance)
