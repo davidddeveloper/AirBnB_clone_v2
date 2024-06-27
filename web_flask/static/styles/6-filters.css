@@ -1,0 +1,33 @@
+.popover, .popover ul {
+    list-style-type: none;
+}
+
+.popover {
+    color: #FAFAFA;
+    background-color: rgb(249, 249, 249);
+    width: 100%;
+    border: 1px solid #DDD;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: none;
+    padding-inline: 15px;
+    align-self: flex-end; 
+    max-width: 300px;
+    overflow: scroll;
+}
+
+.locations:hover ul {
+    display: block;
+}
+
+.popover > li {
+    margin-block: 20px;
+}
+
+.popover h2 {
+    font-size: 16px;
+}
+
+.popover ul li {
+    margin-left: 20px;
+}
